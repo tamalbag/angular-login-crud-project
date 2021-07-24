@@ -1,0 +1,86 @@
+
+  <!--<div class="card-body">
+    <table class="table table-hover table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">Sl no.</th>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">created At</th>
+          <th scope="col">updated At</th>
+          <th scope="col">Add By User</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products;let i = index">
+          <td>{{i+1}}</td>
+          <td>{{product._id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.created_date}}</td>
+         
+          <td>
+            <button type="button" class="btn btn-primary">Edit</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>-->
+
+
+
+<div class="container table-responsive" >
+  <input type="text" id="myInput" [(ngModel)]="searchText" placeholder="Search product.." title="Type in a name">
+  <table class="table table-bordered table-hover table-responsive-sm">
+    <thead style="background-color:darkgrey">
+      <tr>
+      <th >Id</th>
+      <th >Name</th>
+      <th >Price</th>
+      <th >Description</th>
+      <th >created At</th>
+      <th >updated At</th>
+      <th >Add By User</th>
+      <th >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | grdFilter: {name: searchText, price:searchText,  description: searchText}| paginate: { itemsPerPage: 3, currentPage: p };">
+      
+        <td>{{product._id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.created_date}}</td>
+        <td>{{product.created_date}}</td>
+        <td>{{product.add_by_user}}</td>
+        
+        <td>
+          <button type="button" class="btn btn-primary" (click)="doEdit(product._id)">Edit</button>
+          <button type="button" class="btn btn-danger" (click)="doDelete(product._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
